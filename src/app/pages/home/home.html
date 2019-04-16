@@ -1,0 +1,45 @@
+<div>
+    <h2>Send Magic Message</h2>
+</div>
+
+<div padding class="backdrop">
+
+    <div *ngIf="!authenticated() && !triedToSignIn">
+        <p>Authenticating...</p>
+        {{tryToSignIn()}}
+    </div>
+
+    <div *ngIf="!authenticated() && triedToSignIn">
+        <button mat-flat-button color='primary' (click)='login()'>
+            Sign in
+        </button>
+    </div>
+
+
+    <div *ngIf="authenticated() && ! searchingForScreens && activeScreen != null">
+        <!-- <p>Active screen = {{activeScreen}}</p> -->
+        <swiper class="swiper-container" [config]="config" [(index)]="activeScreen"
+            (indexChange)="onScreenChange($event)">
+            <div *ngFor="let screen of availableScreens" class="swiper-slide">
+                <mat-card>
+                    <screen *ngIf="screen" [screenKey]="screen.key" [screenName]="screen.name"></screen>
+                </mat-card>
+            </div>
+        </swiper>
+    </div>
+
+
+    <div>
+        <div *ngIf="authenticated() && searchingForScreens">
+            <p>Searching for screens. Please wait...</p>
+        </div>
+
+    </div>
+
+    <div *ngIf="authenticated()">
+        <div class="login-info">{{loginInfo}}</div>
+        <button mat-flat-button icon-only item-end (click)='signOut()'>
+            <mat-icon name="log-out"></mat-icon>
+
+        </button>
+    </div>

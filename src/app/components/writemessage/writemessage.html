@@ -1,0 +1,9 @@
+
+
+<div class="writemessagearea">
+<input matInput placeholder="Write message" value="Otto her" type="text" [(ngModel)]="message"
+class="writemessageinput"
+(keyup.enter)="sendMessage()" />
+
+<button mat-flat-button id="writemessagebutton" color="primary" (click)='sendMessage()'>Send</button>
+</div>

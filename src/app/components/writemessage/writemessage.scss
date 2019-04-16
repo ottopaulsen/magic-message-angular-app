@@ -1,0 +1,31 @@
+    .writemessagearea {
+        display: flex;
+        align-content: stretch;
+        padding: 0px;
+
+    }
+    
+    .item-inner {
+        padding-right: 0px !important;
+    }
+
+    .writemessagearea {
+        height: 50px;
+    }
+    
+    .writemessageinput {
+        background-color: lightyellow;
+        font-size: large;
+        padding: 2px;
+        width: 79%;
+    }
+
+    #writemessagebutton {
+        align-self: stretch;
+        margin: 0;
+        padding: 10;
+        height: 100%;
+        width: 15%;
+    }
+
+

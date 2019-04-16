@@ -1,0 +1,21 @@
+.lifetime {
+    display: flex;
+}
+
+.badges {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    height: 50px;
+}
+
+.mat-chip-list-wrapper {
+    flex-wrap: nowrap !important;
+}
+
+.badge {
+    display: inline-block;
+    height: 40px;
+}
+
+

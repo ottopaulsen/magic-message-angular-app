@@ -1,0 +1,11 @@
+<div class="lifetime">
+    <div class="badges">
+        <mat-chip-list class="chiplist">
+            <div class="badge" *ngFor='let alternative of getAlternatives(); index as i'>
+                <mat-chip class="chip" color="{{i == currentIndex ? 'primary' : ''}}" (click)='select(i)'>
+                    {{alternative.label}}
+                 </mat-chip>
+            </div>
+        </mat-chip-list>
+    </div>
+</div>
