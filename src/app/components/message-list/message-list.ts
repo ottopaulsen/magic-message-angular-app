@@ -6,7 +6,7 @@ import { firestore } from 'firebase';
 @Component({
   selector: 'app-message-list',
   templateUrl: 'message-list.html',
-  styleUrls: ['./message-list.scss'],
+  styleUrls: ['message-list.scss'],
 
 })
 export class MessageListComponent implements OnChanges {

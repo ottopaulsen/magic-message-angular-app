@@ -24,7 +24,7 @@ export class HomePageComponent implements OnInit {
   logPage: any;
   loginInfo = 'No login info';
   public availableScreens: IMagicScreen[] = [];
-  searchingForScreens: true;
+  searchingForScreens = true;
   private initialSlide = 2;
   triedToSignIn = false;
   public activeScreen = 3;
@@ -68,22 +68,22 @@ export class HomePageComponent implements OnInit {
     this.triedToSignIn = true;
   }
 
-  // Getters
-  getAvailableScreens() {
-    return this.availableScreens;
-  }
+  // // Getters
+  // getAvailableScreens() {
+  //   return this.availableScreens;
+  // }
 
-  getActiveScreen() {
-    return this.availableScreens[this.activeScreen];
-  }
+  // getActiveScreen() {
+  //   return this.availableScreens[this.activeScreen];
+  // }
 
-  getSearchingForScreens() {
-    return this.searchingForScreens;
-  }
+  // getSearchingForScreens() {
+  //   return this.searchingForScreens;
+  // }
 
-  setSearchingForScreens(value) {
-    this.searchingForScreens = value;
-  }
+  // setSearchingForScreens(value) {
+  //   this.searchingForScreens = value;
+  // }
 
   getLastUsedScreen() {
     return this.storage.get(LAST_USED_SCREEN_INDEX_STORAGE_KEY);
@@ -97,13 +97,13 @@ export class HomePageComponent implements OnInit {
     console.log('Screen change: ', e);
   }
 
-  onSwipeLeft(e) {
-    console.log('Swipe left');
-  }
+  // onSwipeLeft(e) {
+  //   console.log('Swipe left');
+  // }
 
-  onSwipeRight(e) {
-    console.log('Swipe right');
-  }
+  // onSwipeRight(e) {
+  //   console.log('Swipe right');
+  // }
 
   // Prøv denne: https://blog.envylabs.com/build-your-own-touch-slider-with-hammerjs-af99665d2869
 
@@ -145,12 +145,12 @@ export class HomePageComponent implements OnInit {
     this.auth.afAuth.idToken.subscribe(token => {
       if (token) {
         console.log('Getting screens');
-        this.setSearchingForScreens(true);
+        this.searchingForScreens = true;
         this.cd.detectChanges();
         this.magicMessageService.getScreens().subscribe(data => {
           this.availableScreens = data;
           console.log('Read screens: ', this.availableScreens);
-          this.setSearchingForScreens(false);
+          this.searchingForScreens = false;
           // this.cd.markForCheck();
           this.cd.detectChanges();
         });
@@ -160,9 +160,5 @@ export class HomePageComponent implements OnInit {
     });
   }
 
-  ionSlideDidChange() {
-    // Save last used screen every time it changes
-    // this.storage.set(LAST_USED_SCREEN_INDEX_STORAGE_KEY, this.slides.getActiveIndex());
-  }
 
 }
