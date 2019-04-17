@@ -1,5 +1,6 @@
 .lifetime {
     display: flex;
+    scroll-behavior: auto;
 }
 
 .badges {
@@ -7,15 +8,22 @@
     overflow-y: hidden;
     white-space: nowrap;
     height: 50px;
+    scroll-behavior: auto;
 }
 
 .mat-chip-list-wrapper {
     flex-wrap: nowrap !important;
+    scroll-behavior: auto;
 }
 
 .badge {
     display: inline-block;
     height: 40px;
+    scroll-behavior: auto;
 }
 
+.chip {
+    height: 100px;
+    scroll-behavior: auto;
+}
 

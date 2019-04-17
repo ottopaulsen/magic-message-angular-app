@@ -28,11 +28,10 @@ export class ScreenComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.lifetimeComponent.setLifetime(this.readLastUsedLifetime(this.screenKey));
+    this.lifetimeComponent.setLifetime(this.readLastUsedLifetime(this.screenKey));
   }
 
   messageSend(message: string) {
-    console.log('Got emitted message: ', message);
     this.sendMessage();
   }
 
