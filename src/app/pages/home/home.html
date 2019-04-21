@@ -20,9 +20,9 @@
         <!-- <p>Active screen = {{activeScreen}}</p> -->
         <swiper class="swiper-container" [config]="config" [(index)]="activeScreen"
             (indexChange)="onScreenChange($event)">
-            <div *ngFor="let screen of availableScreens" class="swiper-slide">
+            <div *ngFor="let screen of availableScreens; index as i" class="swiper-slide">
                 <mat-card>
-                    <screen *ngIf="screen" [screenKey]="screen.key" [screenName]="screen.name"></screen>
+                    <screen *ngIf="screen" id="screen-{{i}}" [screenKey]="screen.key" [screenName]="screen.name"></screen>
                 </mat-card>
             </div>
         </swiper>

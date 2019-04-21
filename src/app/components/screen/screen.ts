@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, Inject, OnInit } from '@angular/core';
+import { Component, Input, ViewChild, Inject, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { MagicMessageService } from '../../services/magicmessage.service';
 import { WriteMessageComponent } from '../writemessage/writemessage';
 import { LifetimeComponent } from '../lifetime/lifetime';
@@ -14,21 +14,29 @@ const LAST_USED_LIFETIME_STORAGE_KEY = 'last-used-lifetime';
   styleUrls: ['./screen.scss'],
 
 })
-export class ScreenComponent implements OnInit {
+export class ScreenComponent implements OnInit, AfterViewInit {
 
   @Input() screenKey: string;
   @Input() screenName: string;
   @ViewChild(LifetimeComponent) private lifetimeComponent: LifetimeComponent;
   @ViewChild(WriteMessageComponent) private writeMessageComponent: WriteMessageComponent;
 
+  private lifetime = 60;
+
   constructor(
+    private cd: ChangeDetectorRef,
     private magicMessageService: MagicMessageService,
     @Inject(LOCAL_STORAGE) private storage: StorageService
   ) {
   }
 
   ngOnInit() {
-    this.lifetimeComponent.setLifetime(this.readLastUsedLifetime(this.screenKey));
+    this.lifetime = this.readLastUsedLifetime(this.screenKey);
+    console.log('Last used lifetime = ', this.lifetime);
+  }
+
+  ngAfterViewInit() {
+    this.lifetimeComponent.showSelectedBadge();
   }
 
   messageSend(message: string) {
@@ -36,12 +44,15 @@ export class ScreenComponent implements OnInit {
   }
 
   lifetimeChanged(lifetime: number) {
+    console.log('lifetimeChanged: ', lifetime);
+    this.lifetime = lifetime;
     this.saveLastUsedLifetime(lifetime);
+    this.cd.detectChanges();
   }
 
   sendMessage() {
     const key = this.screenKey;
-    const lifetime = this.lifetimeComponent.getLifetime();
+    const lifetime = this.lifetime;
     const message = this.writeMessageComponent.getMessage();
     console.log('Sending message: ' + message + ' (lifetime ' + lifetime + ' minutes) to screen ' + key);
     const msg: IMagicMessage = {

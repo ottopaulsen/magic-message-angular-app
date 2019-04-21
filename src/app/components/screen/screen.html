@@ -5,7 +5,7 @@
 <app-message-list  *ngIf="screenKey" [screenKey]="screenKey" [screenName]="screenName"></app-message-list>
 
 <label stacked>Message lifetime:</label>
-<lifetime (lifetimeChanged)="lifetimeChanged($event)"></lifetime>
+<lifetime [selectedMinutes]="lifetime" (lifetimeChanged)="lifetimeChanged($event)"></lifetime>
 
 <label stacked>Message:</label>
 <app-writemessage (messageSend)="messageSend($event)"></app-writemessage>

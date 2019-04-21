@@ -25,9 +25,8 @@ export class HomePageComponent implements OnInit {
   loginInfo = 'No login info';
   public availableScreens: IMagicScreen[] = [];
   searchingForScreens = true;
-  private initialSlide = 2;
   triedToSignIn = false;
-  public activeScreen = 3;
+  public activeScreen = 0;
 
   public config: SwiperConfigInterface = {
     spaceBetween: 10,
@@ -51,7 +50,7 @@ export class HomePageComponent implements OnInit {
     private cd: ChangeDetectorRef,
     @Inject(LOCAL_STORAGE) private storage: StorageService
   ) {
-    this.initialSlide = this.storage.get(LAST_USED_SCREEN_INDEX_STORAGE_KEY) || 0;
+    this.activeScreen = this.readLastUsedScreen(0);
   }
 
   ngOnInit() {
@@ -68,46 +67,19 @@ export class HomePageComponent implements OnInit {
     this.triedToSignIn = true;
   }
 
-  // // Getters
-  // getAvailableScreens() {
-  //   return this.availableScreens;
-  // }
-
-  // getActiveScreen() {
-  //   return this.availableScreens[this.activeScreen];
-  // }
-
-  // getSearchingForScreens() {
-  //   return this.searchingForScreens;
-  // }
-
-  // setSearchingForScreens(value) {
-  //   this.searchingForScreens = value;
-  // }
-
-  getLastUsedScreen() {
-    return this.storage.get(LAST_USED_SCREEN_INDEX_STORAGE_KEY);
+  readLastUsedScreen(defaultScreen: number) {
+    return this.storage.get(LAST_USED_SCREEN_INDEX_STORAGE_KEY) || defaultScreen;
   }
 
-  getInitialSlide() {
-    return this.initialSlide;
+  saveLastUsedScreen(lastUsedScreen) {
+    this.storage.set(LAST_USED_SCREEN_INDEX_STORAGE_KEY, lastUsedScreen);
   }
 
   onScreenChange(e) {
     console.log('Screen change: ', e);
+    this.saveLastUsedScreen(e);
   }
 
-  // onSwipeLeft(e) {
-  //   console.log('Swipe left');
-  // }
-
-  // onSwipeRight(e) {
-  //   console.log('Swipe right');
-  // }
-
-  // Prøv denne: https://blog.envylabs.com/build-your-own-touch-slider-with-hammerjs-af99665d2869
-
-  //
 
   // login() {
   //   console.log('Loggin in')

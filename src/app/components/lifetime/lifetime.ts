@@ -9,11 +9,12 @@ import {
   ViewEncapsulation,
   Directive
 } from '@angular/core';
-import { ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, Input } from '@angular/core';
+
 
 // tslint:disable-next-line:directive-selector
-@Directive({ selector: '.badge' })
-class BadgeDirective {
+@Directive({selector: 'badge'})
+class ChildDirective {
 }
 
 @Component({
@@ -23,11 +24,17 @@ class BadgeDirective {
   styleUrls: ['lifetime.scss'],
   encapsulation: ViewEncapsulation.None, // Override style for mat-chit-list-wrapper
 })
-export class LifetimeComponent implements AfterViewInit {
-  @ViewChild('divbadges') scroll: any;
-  // @ViewChildren('badge') badges: QueryList<any>;
+export class LifetimeComponent {
+  // @ViewChild('divbadges') scroll: any;
 
-  @ViewChildren(BadgeDirective) badges !: QueryList<BadgeDirective>;
+  @ViewChildren('badge') bagdes !: QueryList<any>;
+
+  // @ViewChildren(BadgeDirective) badges !: QueryList<BadgeDirective>;
+
+  @Input() selectedMinutes: number;
+  @Output() lifetimeChanged = new EventEmitter<number>();
+
+  // public currentIndex: number;
 
   private alternatives = [
     { minutes: 1, label: '1 m' },
@@ -42,74 +49,38 @@ export class LifetimeComponent implements AfterViewInit {
     { minutes: 8640, label: '4 d' },
   ];
 
-  public currentIndex: number;
-
-  @Output() lifetimeChanged = new EventEmitter<number>();
-
   constructor(
     private cd: ChangeDetectorRef
   ) {
   }
 
-  ngAfterViewInit() {
-    // Scroll to selected badge
-    const badgeId = 'lifetimechip-' + this.alternatives[this.currentIndex].minutes;
-    console.log('Scrolling to chip ', badgeId);
-    const badgeElement = document.getElementById(badgeId);
-    console.log('Found element ', badgeElement);
-    badgeElement.scrollIntoView();
+  // showSelectedBadge() {
+  //   // Scroll to selected badge
+  //   console.log('showSelectedBadge bagdes: ', this.bagdes);
+  //   console.log('selectedMinutes = ', this.selectedMinutes);
+  //   const badgeId = 'lifetimechip-' + this.selectedMinutes;
+  //   console.log('Scrolling to chip ', badgeId);
+  //   const badgeElement = document.getElementById(badgeId);
+  //   console.log('Found element ', badgeElement);
+  //   badgeElement.scrollIntoView();
+  // }
 
-    const containerId = 'divbadges';
-    const containerElement = document.getElementById(containerId);
-    const matElement = containerElement.getElementsByClassName('mat-chip-list-wrapper');
-    console.log('Found container ', matElement);
-
-    containerElement.focus();
-    containerElement.scrollLeft = 300;
-    matElement[0].scrollLeft = 300;
-
-    this.cd.detectChanges();
-
-    // const clientWidth = containerElement.clientWidth;
-    // const badgeLeft = badgeElement.offsetLeft;
-    // const badgeWidth = badgeElement.clientWidth;
-    // const pos = badgeLeft - clientWidth / 2 + badgeWidth / 2;
-    // console.log('Scrolling to pos ', pos);
-    // matElement[0].scrollLeft = pos;
-
-  }
-
-  scrollChip() {
-    const badgeId = 'lifetimechip-' + this.alternatives[this.currentIndex].minutes;
-    console.log('Scrolling to chip ', badgeId);
-    const badgeElement = document.getElementById(badgeId);
-    console.log('Found element ', badgeElement);
-    badgeElement.scrollIntoView();
-
-  }
-
-
-  setLifetime(value: number) {
-    this.alternatives.forEach((element, i, arr) => {
-      if (element.minutes <= value) {
-        this.currentIndex = i;
+  showSelectedBadge() {
+    this.bagdes.forEach((badge) => {
+      if (badge.nativeElement.getAttribute('aria-selected') === 'true') {
+        badge.nativeElement.scrollIntoView();
       }
     });
   }
 
-  getLifetime(): number {
-    return this.alternatives[this.currentIndex].minutes;
-  }
-
-  lifetimeSelected() {
-    this.lifetimeChanged.emit(this.getLifetime());
+  lifetimeSelected(minutes) {
+    this.lifetimeChanged.emit(minutes);
   }
 
   select(i: number) {
     console.log('Select index ', i);
-    this.currentIndex = i;
-    this.lifetimeSelected();
-    this.cd.detectChanges();
+    this.lifetimeSelected(this.alternatives[i].minutes);
+    // this.cd.detectChanges();
   }
 
   getAlternatives() {
