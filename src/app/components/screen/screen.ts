@@ -39,9 +39,9 @@ export class ScreenComponent implements OnInit, AfterViewInit {
     this.lifetimeComponent.showSelectedBadge();
   }
 
-  messageSend(message: string) {
-    this.sendMessage();
-  }
+  // messageSend(message: string) {
+  //   this.sendMessage(message);
+  // }
 
   lifetimeChanged(lifetime: number) {
     console.log('lifetimeChanged: ', lifetime);
@@ -50,10 +50,10 @@ export class ScreenComponent implements OnInit, AfterViewInit {
     this.cd.detectChanges();
   }
 
-  sendMessage() {
+  sendMessage(message) {
     const key = this.screenKey;
     const lifetime = this.lifetime;
-    const message = this.writeMessageComponent.getMessage();
+    // const message = this.writeMessageComponent.getMessage();
     console.log('Sending message: ' + message + ' (lifetime ' + lifetime + ' minutes) to screen ' + key);
     const msg: IMagicMessage = {
       message,
