@@ -17,29 +17,32 @@
 
 
     <div *ngIf="authenticated() && ! searchingForScreens && activeScreen != null">
-        <!-- <p>Active screen = {{activeScreen}}</p> -->
         <swiper class="swiper-container" [config]="config" [(index)]="activeScreen"
             (indexChange)="onScreenChange($event)">
             <div *ngFor="let screen of availableScreens; index as i" class="swiper-slide">
                 <mat-card>
-                    <screen *ngIf="screen" id="screen-{{i}}" [screenKey]="screen.key" [screenName]="screen.name"></screen>
+                    <screen *ngIf="screen" id="screen-{{i}}" [screenKey]="screen.key" [screenName]="screen.name">
+                    </screen>
                 </mat-card>
             </div>
         </swiper>
     </div>
 
 
-    <div>
-        <div *ngIf="authenticated() && searchingForScreens">
-            <p>Searching for screens. Please wait...</p>
+    <div id="footer">
+        <div>
+            <div *ngIf="authenticated() && searchingForScreens">
+                <p>Searching for screens. Please wait...</p>
+            </div>
+
         </div>
 
-    </div>
+        <div *ngIf="authenticated()">
+            <div class="login-info">{{loginInfo}}</div>
+            <button mat-flat-button icon-only item-end (click)='signOut()'>
+                <mat-icon name="log-out"></mat-icon>
 
-    <div *ngIf="authenticated()">
-        <div class="login-info">{{loginInfo}}</div>
-        <button mat-flat-button icon-only item-end (click)='signOut()'>
-            <mat-icon name="log-out"></mat-icon>
-
-        </button>
+            </button>
+        </div>
     </div>
+</div>

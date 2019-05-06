@@ -7,20 +7,13 @@
         text-align: right;
         vertical-align: middle;
         font-size: smaller;
+        padding-right: 12px;
     }
 
 
-    // .card-md {
-    //     box-shadow: none;
-    // }
-
-    // .content-md, .card-md {
-    //     background: #cecece;
-    // }
-
-    // .hele {
-    //     background: #cecece;
-    //     margin: auto;
-    //     width: 80%;
-    // }
-    
+    #footer {
+        position:absolute;
+        bottom:0;
+        width:100%;
+        height:30px;   /* Height of the footer */
+     }
