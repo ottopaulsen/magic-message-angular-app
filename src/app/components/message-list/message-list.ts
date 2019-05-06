@@ -2,6 +2,8 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { MagicMessageService } from '../../services/magicmessage.service';
 import { Observable } from 'rxjs';
 import { firestore } from 'firebase';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatIconRegistry } from '@angular/material';
 
 @Component({
   selector: 'app-message-list',
@@ -18,8 +20,13 @@ export class MessageListComponent implements OnChanges {
   @Input() screenName: string;
 
   constructor(
-    private magicMessageService: MagicMessageService
+    private magicMessageService: MagicMessageService,
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer
   ) {
+    iconRegistry.addSvgIcon(
+      'delete',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/icon/baseline-delete-24px.svg'));
   }
 
   ngOnChanges() {

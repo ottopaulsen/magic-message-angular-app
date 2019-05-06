@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, NgZone, ChangeDetectorRef } from '@angular/core';
 
 /**
  * Generated class for the WriteMessageComponent component.
@@ -13,27 +13,36 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class WriteMessageComponent {
 
-  message = '';
+  private message = '';
 
-  @Input() screenKey: string;
 
   @Output() messageSend = new EventEmitter<string>();
 
   constructor(
+    private cd: ChangeDetectorRef
   ) {
+  }
+
+  onChange(event) {
+    console.log('onChange: ', event);
+    console.log('message: ', this.message);
   }
 
   getMessage(): string {
     return this.message;
   }
 
-  setMessage(message: string): void {
+  setMessage(message): void {
+    console.log('Is in angular zone: ', NgZone.isInAngularZone());
+    console.log('NgZone: ', NgZone);
     this.message = message;
+    this.cd.detectChanges();
   }
 
   sendMessage() {
-    console.log('Emitting message');
-    this.messageSend.emit(this.message);
+    console.log('Emitting message ', this.getMessage());
+    this.messageSend.emit(this.getMessage());
+    this.setMessage('');
   }
 
 }

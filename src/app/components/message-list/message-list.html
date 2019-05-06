@@ -1,21 +1,23 @@
 <div class="message-screen">
-  <h3>{{screenName}}</h3>
-  <!-- <ion-scroll scrollY="true"> -->
-  <table *ngFor='let message of messages | async'>
-    <tbody>
-      <tr *ngIf='showMessage(message)' class="message-row">
-        <td class="message-from-col">
-          {{message.payload?.doc.data().sentBy}} ({{calculateAge(message.payload?.doc.data().sentTime)}})
-        </td>
-        <td class="message-message-col" [ngClass]="{'not_confirmed' : ! message.payload?.doc.data().receipt}">
-          {{message.payload.doc.data().message}}
-        </td>
-        <td class="message-icon-col">
-          <ion-icon name="trash" color="default" *ngIf='canDeleteMessage(message)' (click)='deleteMessage(message.payload?.doc.ref.path)'>
-          </ion-icon>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-<!-- </ion-scroll> -->
+    <h3>{{screenName}}</h3>
+    <!-- <ion-scroll scrollY="true"> -->
+    <table *ngFor='let message of messages | async'>
+        <tbody>
+            <tr *ngIf='showMessage(message)' class="message-row">
+                <td class="message-from-col">
+                    {{message.payload?.doc.data().sentBy}} ({{calculateAge(message.payload?.doc.data().sentTime)}})
+                </td>
+                <td class="message-message-col" [ngClass]="{'not_confirmed' : ! message.payload?.doc.data().receipt}">
+                    {{message.payload.doc.data().message}}
+                </td>
+                <td class="message-icon-col">
+                    <a aria-label="Delete message" *ngIf='canDeleteMessage(message)'
+                        (click)='deleteMessage(message.payload?.doc.ref.path)'>
+                        <i class="material-icons md-24">delete</i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- </ion-scroll> -->
 </div>
