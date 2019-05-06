@@ -2,9 +2,11 @@
     <input matInput 
         placeholder="Write message"
         type="text" 
+        [ngModel]="message" 
+        (ngModelChange)="setMessage($event)"
         class="writemessageinput"
-        (ngModelChange)="onChange($event)"
         name="message"
+        (keydown.enter)="onKeyEnter($event)"
         />
 
     <button mat-flat-button 

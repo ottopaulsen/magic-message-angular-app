@@ -13,8 +13,7 @@ import { Component, Input, Output, EventEmitter, NgZone, ChangeDetectorRef } fro
 })
 export class WriteMessageComponent {
 
-  private message = '';
-
+  message = '';
 
   @Output() messageSend = new EventEmitter<string>();
 
@@ -23,9 +22,9 @@ export class WriteMessageComponent {
   ) {
   }
 
-  onChange(event) {
-    console.log('onChange: ', event);
-    console.log('message: ', this.message);
+  onKeyEnter(event) {
+    console.log('Enter pressed: ', event);
+    this.sendMessage();
   }
 
   getMessage(): string {
@@ -33,8 +32,6 @@ export class WriteMessageComponent {
   }
 
   setMessage(message): void {
-    console.log('Is in angular zone: ', NgZone.isInAngularZone());
-    console.log('NgZone: ', NgZone);
     this.message = message;
     this.cd.detectChanges();
   }
