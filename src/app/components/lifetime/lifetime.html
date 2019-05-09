@@ -1,12 +1,14 @@
 <div class="lifetime swiper-no-swiping badges" id="divbadges">
-    <!-- <div class="badges"> -->
     <mat-chip-list class="chiplist" id="badgeslist">
-        <div class="badge" *ngFor='let alternative of getAlternatives(); index as i'>
-            <mat-chip #badge id="lifetimechip-{{alternative.minutes}}" class="chip" color="primary"
-                selected="{{alternative.minutes == selectedMinutes}}" (click)='select(i)'>
-                {{alternative.label}}
-            </mat-chip>
-        </div>
+        <app-lifetime-chip 
+            #lifetimeChip
+            class="badge" 
+            *ngFor='let alternative of getAlternatives(); index as i' 
+            [minutes]="alternative.minutes"
+            [label]="alternative.label"
+            [selected]="alternative.minutes == selectedMinutes"
+            (select)="lifetimeSelected(alternative.minutes)"
+            >
+        </app-lifetime-chip>
     </mat-chip-list>
-    <!-- </div> -->
 </div>

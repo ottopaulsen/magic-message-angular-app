@@ -7,15 +7,12 @@ import {
   QueryList,
   AfterViewInit,
   ViewEncapsulation,
-  Directive
+  Directive,
+  ElementRef
 } from '@angular/core';
 import { ChangeDetectorRef, Input } from '@angular/core';
+import { LifetimeChipComponent } from '../lifetime-chip/lifetime-chip';
 
-
-// tslint:disable-next-line:directive-selector
-@Directive({selector: 'badge'})
-class ChildDirective {
-}
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -25,16 +22,11 @@ class ChildDirective {
   encapsulation: ViewEncapsulation.None, // Override style for mat-chit-list-wrapper
 })
 export class LifetimeComponent {
-  // @ViewChild('divbadges') scroll: any;
 
-  @ViewChildren('badge') bagdes !: QueryList<any>;
-
-  // @ViewChildren(BadgeDirective) badges !: QueryList<BadgeDirective>;
+  @ViewChildren('lifetimeChip') badges !: QueryList<any>;
 
   @Input() selectedMinutes: number;
   @Output() lifetimeChanged = new EventEmitter<number>();
-
-  // public currentIndex: number;
 
   private alternatives = [
     { minutes: 1, label: '1 m' },
@@ -54,38 +46,20 @@ export class LifetimeComponent {
   ) {
   }
 
-  // showSelectedBadge() {
-  //   // Scroll to selected badge
-  //   console.log('showSelectedBadge bagdes: ', this.bagdes);
-  //   console.log('selectedMinutes = ', this.selectedMinutes);
-  //   const badgeId = 'lifetimechip-' + this.selectedMinutes;
-  //   console.log('Scrolling to chip ', badgeId);
-  //   const badgeElement = document.getElementById(badgeId);
-  //   console.log('Found element ', badgeElement);
-  //   badgeElement.scrollIntoView();
-  // }
-
   showSelectedBadge() {
-    this.bagdes.forEach((badge) => {
-      if (badge.nativeElement.getAttribute('aria-selected') === 'true') {
-        badge.nativeElement.scrollIntoView();
-      }
-    });
+    const chip = this.badges.find(badge => badge.selected);
+    chip.scrollIntoView();
   }
 
-  lifetimeSelected(minutes) {
+  lifetimeSelected(minutes: number) {
     this.lifetimeChanged.emit(minutes);
-  }
-
-  select(i: number) {
-    console.log('Select index ', i);
-    this.lifetimeSelected(this.alternatives[i].minutes);
-    // this.cd.detectChanges();
   }
 
   getAlternatives() {
     return this.alternatives;
   }
+
+
 
 
 }

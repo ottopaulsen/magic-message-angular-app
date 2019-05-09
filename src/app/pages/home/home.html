@@ -16,12 +16,13 @@
     </div>
 
 
-    <div *ngIf="authenticated() && ! searchingForScreens && activeScreen != null">
-        <swiper class="swiper-container" [config]="config" [(index)]="activeScreen"
-            (indexChange)="onScreenChange($event)">
+    <div *ngIf="authenticated() && haveScreens()">
+        <swiper class="swiper-container" [config]="config" [index]="activeScreen"
+            (indexChange)="onScreenChange($event)"
+            (slideChangeTransitionEnd)="transitionEnd()">
             <div *ngFor="let screen of availableScreens; index as i" class="swiper-slide">
                 <mat-card>
-                    <screen *ngIf="screen" id="screen-{{i}}" [screenKey]="screen.key" [screenName]="screen.name">
+                    <screen #screenComponent *ngIf="screen" id="screen-{{i}}" [screenKey]="screen.key" [screenName]="screen.name">
                     </screen>
                 </mat-card>
             </div>
@@ -30,19 +31,12 @@
 
 
     <div id="footer">
-        <div>
-            <div *ngIf="authenticated() && searchingForScreens">
-                <p>Searching for screens. Please wait...</p>
-            </div>
-
+        <div *ngIf="authenticated() && searchingForScreens" class="status-info">
+            <p>Searching for screens. Please wait...</p>
         </div>
 
-        <div *ngIf="authenticated()">
-            <div class="login-info">{{loginInfo}}</div>
-            <button mat-flat-button icon-only item-end (click)='signOut()'>
-                <mat-icon name="log-out"></mat-icon>
-
-            </button>
+        <div *ngIf="authenticated() && !searchingForScreens" class="login-info">
+            <p>{{loginInfo}}</p>
         </div>
     </div>
 </div>

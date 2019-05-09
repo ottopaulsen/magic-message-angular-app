@@ -48,6 +48,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { LifetimeChipComponent } from './components/lifetime-chip/lifetime-chip';
 
 export const firebaseConfig = environment.fire;
 
@@ -71,7 +72,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MessageListComponent,
     LifetimeComponent,
     WriteMessageComponent,
-    ScreenComponent
+    ScreenComponent,
+    LifetimeChipComponent
   ],
   imports: [
     BrowserModule,
@@ -98,7 +100,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MessageListComponent,
     LifetimeComponent,
     WriteMessageComponent,
-    ScreenComponent
+    ScreenComponent,
+    LifetimeChipComponent
   ],
   providers: [
     MagicMessageService,

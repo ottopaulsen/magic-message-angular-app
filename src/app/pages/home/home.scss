@@ -5,13 +5,18 @@
 
     .login-info {
         text-align: right;
-        vertical-align: middle;
-        font-size: smaller;
         padding-right: 12px;
     }
-
-
+    
+    .status-info {
+        text-align: left;
+        padding-left: 12px;
+    }
+    
+    
     #footer {
+        font-size: smaller;
+        vertical-align: middle;
         position:absolute;
         bottom:0;
         width:100%;

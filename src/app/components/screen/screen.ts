@@ -21,7 +21,7 @@ export class ScreenComponent implements OnInit, AfterViewInit {
   @ViewChild(LifetimeComponent) private lifetimeComponent: LifetimeComponent;
   @ViewChild(WriteMessageComponent) private writeMessageComponent: WriteMessageComponent;
 
-  private lifetime = 60;
+  lifetime = 60;
 
   constructor(
     private cd: ChangeDetectorRef,
@@ -36,12 +36,13 @@ export class ScreenComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.lifetimeComponent.showSelectedBadge();
+    console.log('ngAfterViewInit screen ', this.screenName);
   }
 
-  // messageSend(message: string) {
-  //   this.sendMessage(message);
-  // }
+  display() {
+    console.log('Displaying screen ', this.screenName);
+    this.lifetimeComponent.showSelectedBadge();
+  }
 
   lifetimeChanged(lifetime: number) {
     console.log('lifetimeChanged: ', lifetime);
