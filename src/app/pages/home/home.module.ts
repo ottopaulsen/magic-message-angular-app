@@ -5,8 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material';
 
-import { HomePageComponent } from './home';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -15,11 +13,8 @@ import { HomePageComponent } from './home';
     MatIconModule,
     RouterModule.forChild([
       {
-        path: '',
-        component: HomePageComponent
       }
     ])
   ],
-  declarations: [HomePageComponent]
 })
 export class HomePageModule {}

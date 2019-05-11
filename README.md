@@ -1,27 +1,34 @@
-# MagicMessageAngularApp
+# MagicMessage Angular App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.5.
+![screenshot](./screenshot.png)
 
-## Development server
+This is the Angular based app for my MMM-MessageToScreen module, which is a module for MagicMirror. See my [magic](https://github.com/ottopaulsen/magic) repository for more information.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+The app is used to send messages to the magic mirror module.
 
-## Code scaffolding
+I have two versions of the app. One made with Angular and one with React.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Run locally
 
-## Build
+```
+ng serve --open
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Initialize firebase
 
-## Running unit tests
+In order to deploy to Firebase hosting, you need to init firebase:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+firebase init
+```
 
-## Running end-to-end tests
+Select project, set `dist` as the public directory and select `y` for single page app.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
+## Deploy
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```
+ng build --prod
+firebase deploy --only hosting
+```
+
