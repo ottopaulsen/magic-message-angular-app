@@ -6,6 +6,7 @@
     .login-info {
         text-align: right;
         padding-right: 12px;
+        vertical-align: middle;
     }
     
     .status-info {
@@ -22,3 +23,11 @@
         width:100%;
         height:30px;   /* Height of the footer */
      }
+
+     i {    
+        vertical-align: middle;
+        color: rgb(150, 150, 150);
+        font-size: 20px;
+        cursor: pointer;
+        padding-bottom: 1px;
+    }

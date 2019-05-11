@@ -17,12 +17,12 @@
 
 
     <div *ngIf="authenticated() && haveScreens()">
-        <swiper class="swiper-container" [config]="config" [index]="activeScreen"
-            (indexChange)="onScreenChange($event)"
+        <swiper class="swiper-container" [config]="config" [index]="activeScreen" (indexChange)="onScreenChange($event)"
             (slideChangeTransitionEnd)="transitionEnd()">
             <div *ngFor="let screen of availableScreens; index as i" class="swiper-slide">
                 <mat-card>
-                    <screen #screenComponent *ngIf="screen" id="screen-{{i}}" [screenKey]="screen.key" [screenName]="screen.name">
+                    <screen #screenComponent *ngIf="screen" id="screen-{{i}}" [screenKey]="screen.key"
+                        [screenName]="screen.name">
                     </screen>
                 </mat-card>
             </div>
@@ -36,7 +36,10 @@
         </div>
 
         <div *ngIf="authenticated() && !searchingForScreens" class="login-info">
-            <p>{{loginInfo}}</p>
+            {{loginInfo}}
+                <a aria-label="Sign out" (click)='signOut()'>
+                    <i class="material-icons md-24">exit_to_app</i>
+                </a>
         </div>
     </div>
 </div>

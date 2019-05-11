@@ -4,6 +4,7 @@ import { WriteMessageComponent } from '../writemessage/writemessage';
 import { LifetimeComponent } from '../lifetime/lifetime';
 import { IMagicMessage } from '../../services/magicmessage';
 import { LOCAL_STORAGE, StorageService } from 'angular-webstorage-service';
+import { MessageListComponent } from '../message-list/message-list';
 
 const LAST_USED_LIFETIME_STORAGE_KEY = 'last-used-lifetime';
 
@@ -20,8 +21,11 @@ export class ScreenComponent implements OnInit, AfterViewInit {
   @Input() screenName: string;
   @ViewChild(LifetimeComponent) private lifetimeComponent: LifetimeComponent;
   @ViewChild(WriteMessageComponent) private writeMessageComponent: WriteMessageComponent;
+  @ViewChild(MessageListComponent) private messageListComponent: MessageListComponent;
 
   lifetime = 60;
+
+  private displayingMessages = false;
 
   constructor(
     private cd: ChangeDetectorRef,
@@ -37,6 +41,10 @@ export class ScreenComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     console.log('ngAfterViewInit screen ', this.screenName);
+    if (!this.displayingMessages) {
+      this.messageListComponent.display();
+      this.displayingMessages = true;
+    }
   }
 
   display() {

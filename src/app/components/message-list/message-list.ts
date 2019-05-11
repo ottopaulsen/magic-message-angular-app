@@ -30,6 +30,9 @@ export class MessageListComponent implements OnChanges {
   }
 
   ngOnChanges() {
+  }
+
+  display() {
     this.messages = this.magicMessageService.getMessages(this.screenKey);
   }
 

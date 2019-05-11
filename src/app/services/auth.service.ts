@@ -79,19 +79,6 @@ export class AuthService {
         }
     }
 
-    // signInWithGoogle() {
-    //     var self = this;
-    //     self.afAuth.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-    //         .then(function () {
-    //             console.log('Sign in with Google');
-    //             var provider = new firebase.auth.GoogleAuthProvider();
-    //             firebase.auth().signInWithRedirect(provider);
-    //         })
-    //         .catch(function (error) {
-    //             console.error('Authentication setPersistance error code: ' + error.code + '(' + error.message + ')');
-    //         });
-    // }
-
     signInWithGoogle() {
         const self = this;
         console.log('Signing in with Google');
@@ -126,7 +113,7 @@ export class AuthService {
         this.storage.remove(TOKEN_STORAGE_KEY);
         this.storage.remove(USER_STORAGE_KEY);
         this.afAuth.auth.signOut().then(result => {
-            console.log('Signed out: ');
+            console.log('Signed out: ', result);
         });
     }
 

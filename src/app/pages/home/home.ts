@@ -82,6 +82,7 @@ export class HomePageComponent implements OnInit {
 
     onScreenChange(e) {
         this.activeScreen = e;
+        this.saveLastUsedScreen(e);
         console.log('Screen change: ', e);
     }
 
@@ -89,20 +90,6 @@ export class HomePageComponent implements OnInit {
         const screenComponent = this.screenComponents.toArray()[this.activeScreen];
         screenComponent.display();
     }
-
-
-    // login() {
-    //   console.log('Loggin in')
-    //   this.auth.signInWithGoogle()
-    //     .then(
-    //       () => {
-    //         console.log('Google sign in ok');
-    //       },
-    //       (error) => {
-    //         console.log('Google sign in error:', error.message);
-    //       }
-    //     );
-    // }
 
     login() {
         console.log('Logging in');
@@ -124,16 +111,50 @@ export class HomePageComponent implements OnInit {
     }
 
     readScreens() {
+
+        const isEquivalent = (a, b) => {
+            const aProps = Object.getOwnPropertyNames(a);
+            const bProps = Object.getOwnPropertyNames(b);
+            if (aProps.length !== bProps.length) {
+                return false;
+            }
+
+            aProps.forEach ( (propName, i) => {
+                if (bProps[i] !== propName) { return false; }
+                if (a[propName] !== b[propName]) {
+                    return false;
+                }
+            });
+
+            return true;
+        };
+
+        const arraysEqual = (a, b) => {
+            if (a === b) { return true; }
+            if (a == null || b == null) { return false; }
+            if (a.length !== b.length) { return false; }
+
+            for (let i = 0; i < a.length; ++i) {
+                if (!isEquivalent(a[i], b[i])) { return false; }
+            }
+            return true;
+        };
+
         this.auth.afAuth.idToken.subscribe(token => {
             if (token) {
                 console.log('Getting screens');
                 this.searchingForScreens = true;
                 this.cd.detectChanges();
                 this.magicMessageService.getScreens().subscribe(data => {
-                    this.availableScreens = data;
-                    console.log('Read screens: ', this.availableScreens);
+                    console.log('Read screens: ', data);
+
+                    if (!arraysEqual(this.availableScreens, data)) {
+                        this.availableScreens = data;
+                    }
+
                     this.searchingForScreens = false;
                     localStorage.setItem(lsPrefix + 'screens', JSON.stringify(this.availableScreens));
+                    this.onScreenChange(this.activeScreen);
                     this.cd.detectChanges();
                 });
             } else {
@@ -145,6 +166,4 @@ export class HomePageComponent implements OnInit {
     haveScreens() {
         return (this.availableScreens.length > 0);
     }
-
-
 }
