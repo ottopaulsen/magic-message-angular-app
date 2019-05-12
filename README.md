@@ -22,7 +22,7 @@ In order to deploy to Firebase hosting, you need to init firebase:
 firebase init
 ```
 
-Select project, set `dist` as the public directory and select `y` for single page app.
+Select hosting, then select project, set `dist` as the public directory and select `y` for single page app.
 
 
 ## Deploy
