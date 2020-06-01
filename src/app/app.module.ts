@@ -39,11 +39,14 @@ import { MessageListComponent } from './components/message-list/message-list';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { RouteReuseStrategy } from '@angular/router';
 import { ScreenComponent } from './components/screen/screen';
-import { StorageServiceModule } from 'angular-webstorage-service';
+import { StorageServiceModule } from 'ngx-webstorage-service';
 import { WriteMessageComponent } from './components/writemessage/writemessage';
 import { environment } from '../environments/environment';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
@@ -107,9 +110,9 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MagicMessageService,
     AngularFireAuth,
     AuthService,
-    {provide: ErrorHandler, useClass: ErrorHandler},
-    {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
-    {provide: SWIPER_CONFIG, useValue: DEFAULT_SWIPER_CONFIG},
+    { provide: ErrorHandler, useClass: ErrorHandler },
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: SWIPER_CONFIG, useValue: DEFAULT_SWIPER_CONFIG },
   ]
 })
-export class AppModule {}
+export class AppModule { }

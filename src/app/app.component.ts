@@ -12,6 +12,7 @@
 import { AuthService } from './services/auth.service';
 import { Component } from '@angular/core';
 import { HomePageComponent } from './pages/home/home';
+import { AngularFirestore } from '@angular/fire/firestore';
 // import { StatusBar } from '@ionic-native/status-bar';
 
 @Component({
@@ -25,6 +26,7 @@ export class MagicMessageAppComponent {
 
   constructor(
     // statusBar: StatusBar,
-    private auth: AuthService) {
+    private auth: AuthService,
+    firestore: AngularFirestore) {
   }
 }

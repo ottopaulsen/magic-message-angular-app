@@ -3,7 +3,7 @@ import { NavController, IonSlides } from '@ionic/angular';
 import { MagicMessageService } from '../../services/magicmessage.service';
 import { AuthService } from '../../services/auth.service';
 import { IMagicScreen } from '../../services/magicscreen';
-import { LOCAL_STORAGE, StorageService } from 'angular-webstorage-service';
+import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
 const LAST_USED_SCREEN_INDEX_STORAGE_KEY = 'last-used-screen_index';
@@ -119,7 +119,7 @@ export class HomePageComponent implements OnInit {
                 return false;
             }
 
-            aProps.forEach ( (propName, i) => {
+            aProps.forEach((propName, i) => {
                 if (bProps[i] !== propName) { return false; }
                 if (a[propName] !== b[propName]) {
                     return false;

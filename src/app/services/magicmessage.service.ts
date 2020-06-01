@@ -6,7 +6,7 @@ import { AuthService } from './auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { IMagicScreen } from './magicscreen';
-import { LOCAL_STORAGE, StorageService } from 'angular-webstorage-service';
+import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { Inject, Injectable } from '@angular/core';
 
 

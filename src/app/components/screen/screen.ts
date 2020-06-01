@@ -3,7 +3,7 @@ import { MagicMessageService } from '../../services/magicmessage.service';
 import { WriteMessageComponent } from '../writemessage/writemessage';
 import { LifetimeComponent } from '../lifetime/lifetime';
 import { IMagicMessage } from '../../services/magicmessage';
-import { LOCAL_STORAGE, StorageService } from 'angular-webstorage-service';
+import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { MessageListComponent } from '../message-list/message-list';
 
 const LAST_USED_LIFETIME_STORAGE_KEY = 'last-used-lifetime';

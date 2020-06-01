@@ -1,9 +1,9 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { MagicMessageService } from '../../services/magicmessage.service';
 import { Observable } from 'rxjs';
-import { firestore } from 'firebase';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MatIconRegistry } from '@angular/material';
+import { MatIconRegistry } from '@angular/material/icon';
+import { firestore } from 'firebase';
 
 @Component({
   selector: 'app-message-list',
@@ -36,7 +36,7 @@ export class MessageListComponent implements OnChanges {
     this.messages = this.magicMessageService.getMessages(this.screenKey);
   }
 
-  calculateAge(time: firestore.Timestamp): string {
+  calculateAge(time: firebase.firestore.Timestamp): string {
     const sec = Math.round((firestore.Timestamp.now().seconds - time.seconds));
     if (sec < 60) { return 'now'; }
     const min = Math.round(sec / 60);
